@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Comic Neue', cursive;
+      background: linear-gradient(to right, #ff9a9e, #fad0c4);
+      text-align: center;
+      padding: 50px;
+      overflow-x: hidden;
+    }
+    h1 {
+      font-size: 3em;
+      color: #fff;
+      text-shadow: 2px 2px #ff6a95;
+    }
+    p {
+      color: #fff;
+      font-size: 1.2em;
+    }
+    button {
+      padding: 15px 30px;
+      font-size: 1.2em;
+      background-color: #ff6a95;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: 0.3s;
+    }
+    button:hover {
+      transform: scale(1.1);
+    }
+    #giftMessage {
+      display: none;
+      margin-top: 30px;
+      font-size: 1.5em;
+      color: #fff;
+    }
+    #quiz {
+      display: none;
+      margin-top: 20px;
+      font-size: 1.2em;
+      color: #fff;
+    }
+    input[type="text"] {
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      margin-top: 10px;
+      width: 200px;
+      font-size: 1em;
+    }
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background-color: #fff;
+      animation: fall 5s linear infinite;
+      z-index: 9999;
+    }
+    @keyframes fall {
+      0% {transform: translateY(0);}
+      100% {transform: translateY(100vh);}
+    }
+    /* Slideshow */
+    #slideshow {
+      display: none;
+      margin-top: 20px;
+    }
+    #slideshow img {
+      max-width: 80%;
+      border-radius: 15px;
+      margin-top: 20px;
+      box-shadow: 0px 5px 20px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎉 Happy Birthday [Name]! 🎉</h1>
+  <p>Click below to see your surprise!</p>
+  <button onclick="showGift()">Open Your Gift 🎁</button>
+
+  <div id="giftMessage">
+    🎈 Surprise! Wishing you a day full of smiles, fun, and love! 🎈
+    <div id="slideshow">
+      <img src="https://via.placeholder.com/400x300.png?text=Memory+1" alt="Memory 1">
+      <img src="https://via.placeholder.com/400x300.png?text=Memory+2" alt="Memory 2">
+      <img src="https://via.placeholder.com/400x300.png?text=Memory+3" alt="Memory 3">
+    </div>
+    <div id="quiz">
+      <p>Quick Birthday Quiz! 🎂</p>
+      <p>What’s my favorite color?</p>
+      <input type="text" id="answer" placeholder="Type your answer">
+      <button onclick="checkAnswer()">Submit</button>
+      <p id="quizResult"></p>
+    </div>
+  </div>
+
+  <audio id="music" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    function showGift() {
+      document.getElementById('giftMessage').style.display = 'block';
+      document.getElementById('slideshow').style.display = 'block';
+      document.getElementById('quiz').style.display = 'block';
+      document.getElementById('music').play();
+      createConfetti(100);
+    }
+
+    function createConfetti(amount) {
+      for(let i=0; i<amount; i++){
+        let confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        confetti.style.left = Math.random() * window.innerWidth + 'px';
+        confetti.style.backgroundColor = `hsl(${Math.random()*360}, 70%, 60%)`;
+        document.body.appendChild(confetti);
+        setTimeout(() => confetti.remove(), 5000);
+      }
+    }
+
+    function checkAnswer() {
+      const answer = document.getElementById('answer').value.toLowerCase();
+      const result = document.getElementById('quizResult');
+      if(answer === "blue") { // change "blue" to your actual favorite color or answer
+        result.innerText = "🎉 Correct! You know me well!";
+      } else {
+        result.innerText = "Oops! Try again!";
+      }
+    }
+  </script>
+
+</body>
+</html>
